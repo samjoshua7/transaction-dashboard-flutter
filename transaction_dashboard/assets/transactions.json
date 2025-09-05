@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Payment to John",
+    "amount": 1200.50,
+    "date": "2025-09-01",
+    "status": "pending"
+  },
+  {
+    "id": "2",
+    "name": "Invoice #204",
+    "amount": 750.00,
+    "date": "2025-09-02",
+    "status": "completed"
+  },
+  {
+    "id": "3",
+    "name": "Refund to Alice",
+    "amount": 500.00,
+    "date": "2025-09-03",
+    "status": "flagged"
+  }
+]
