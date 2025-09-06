@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   decoration: const InputDecoration(labelText: "Date (YYYY-MM-DD)"),
                 ),
                 DropdownButtonFormField<String>(
-                  value: status,
+                  initialValue: status,
                   items: const [
                     DropdownMenuItem(value: "pending", child: Text("Pending")),
                     DropdownMenuItem(value: "completed", child: Text("Completed")),
@@ -193,16 +193,17 @@ class _HomePageState extends State<HomePage> {
         ),
         SizedBox(
           height: 180, // adjust card row height
-          child: DragTarget<TransactionModel>(
+          child: 
+          DragTarget<TransactionModel>(
             onAccept: (t) => _onDrop(t, status),
             builder: (context, candidateData, rejectedData) {
               return ListView.builder(
-                scrollDirection: Axis.horizontal, // 🔥 sideways scroll
+                scrollDirection: Axis.horizontal,
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   var t = items[index];
                   return Container(
-                    width: 160, // each card width
+                    width: 160,
                     margin: const EdgeInsets.all(8),
                     child: LongPressDraggable<TransactionModel>(
                       data: t,
@@ -211,8 +212,7 @@ class _HomePageState extends State<HomePage> {
                           width: 160,
                           child: TransactionCard(
                             transaction: t,
-                            onEdit: (tx) =>
-                                _showTransactionDialog(transaction: tx),
+                            onEdit: (tx) => _showTransactionDialog(transaction: tx),
                           ),
                         ),
                       ),
@@ -220,14 +220,12 @@ class _HomePageState extends State<HomePage> {
                         opacity: 0.5,
                         child: TransactionCard(
                           transaction: t,
-                          onEdit: (tx) =>
-                              _showTransactionDialog(transaction: tx),
+                          onEdit: (tx) => _showTransactionDialog(transaction: tx),
                         ),
                       ),
                       child: TransactionCard(
                         transaction: t,
-                        onEdit: (tx) =>
-                            _showTransactionDialog(transaction: tx),
+                        onEdit: (tx) => _showTransactionDialog(transaction: tx),
                       ),
                     ),
                   );
@@ -268,9 +266,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       child: DragTarget<TransactionModel>(
-        onAccept: (dragged) {
+        onAcceptWithDetails: (details) {
           setState(() {
-            dragged.status = t.status; // drop updates status
+            details.data.status = t.status; // ✅ use details.data
           });
           _saveData();
         },
